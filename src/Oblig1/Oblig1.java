@@ -1,5 +1,6 @@
 package Oblig1;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class Oblig1 {
@@ -31,18 +32,17 @@ public class Oblig1 {
 
     public static int ombyttinger(int[] a) {
         int antall = 0;
-
+        //12, 1, 2, 3, 11, 5, 6, 7, 8, 9
         for (int i = 1; i < a.length; i++) {
             if (a[i] < a[i - 1]) {
                 antall++;
-
                 int temp = a[i];
                 a[i] = a[i - 1];
                 a[i - 1] = temp;
+                System.out.println(Arrays.toString(a));
             }
         }
         return antall;
-
     }
 
 
@@ -73,12 +73,60 @@ public class Oblig1 {
         if (a.length < 1) return 0;
         int begin = 0;
         int end = a.length;
+        int temp = a[begin];
+        int antallUlike = 1;
+        boolean funnetTidligere = false;
 
+        // Løper gjennom listen fra index 1 og sammenligner a[i] med a[-1], hvis de er forskjellige går den inn i neste løkke
+        for (int i = begin+1; i < end; i++) {
+            if (a[i] != temp) {
+                // lagrer verdien i hjelpe variabel
+                int helper = a[i];
+                // løper gjennom listen fra der den fant et tall som var forskjellig og sjekker alle tallene forran om dette tallet finnes fra før, ved hjelp av en for-løkke som teller bakover
+                for (int j = i-1; j >= begin; j--) {
+                    if (helper == a[j]) { // hvis tallet er funnet fra før så gå ut av loopen
+                        funnetTidligere = true;
+                        break;
+                    } else if(helper != a[j]) { //hvis tallet ikke er funnet fra før, setter bool'en til false og plusser senere 1 på antallUlike
+                        funnetTidligere = false;
+                    }
+                }
+                if (!funnetTidligere) {
+                    antallUlike++;
+                }
+                temp = a[i];
+            }
+        }
+        return antallUlike;
     }
 
     ///// Oppgave 4 //////////////////////////////////////
+    // 6, 10, 9, 4, 1, 3, 8, 5, 2, 7
     public static void delsortering(int[] a) {
-        throw new UnsupportedOperationException();
+        int begin = 1;
+        int end = a.length;
+        System.out.println(end);
+        // bruker insertion sort for å sortere hele listen
+        for (int i = begin; i < end; i++) {
+           int key = a[i];
+           int j = i-1;
+           while(j>=0 && a[j]>key) {
+               a[j+1] = a[j];
+               j = j-1;
+           }
+           a[j+1] = key;
+        }
+        int antallOddetall = 0;
+        for (int i = begin; i < end; i++) {
+            if (a[i] % 2 == 0) {
+                antallOddetall++;
+
+            } else {
+
+            }
+        }
+        System.out.println(antallOddetall);
+        System.out.println(Arrays.toString(a));
     }
 
     ///// Oppgave 5 //////////////////////////////////////
