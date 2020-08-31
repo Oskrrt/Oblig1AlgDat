@@ -48,12 +48,32 @@ public class Oblig1 {
 
     ///// Oppgave 2 //////////////////////////////////////
     public static int antallUlikeSortert(int[] a) {
-        throw new UnsupportedOperationException();
+        if (a.length < 1) return 0;
+        int begin = 0;
+        int end = a.length;
+        // sjekker om arrayet er sortert stigende
+        for (int i = begin; i < end-1; i++) {
+            if (a[i] > a[i+1]) {
+                throw new IllegalStateException("Arrayet er ikke sortert");
+            }
+        }
+        int antallUlike = 1;
+        int temp = a[begin];
+        for (int i = begin+1; i < end; i++) {
+            if (a[i] != temp) {
+                antallUlike++;
+                temp = a[i];
+            }
+        }
+        return antallUlike;
     }
 
     ///// Oppgave 3 //////////////////////////////////////
     public static int antallUlikeUsortert(int[] a) {
-        throw new UnsupportedOperationException();
+        if (a.length < 1) return 0;
+        int begin = 0;
+        int end = a.length;
+
     }
 
     ///// Oppgave 4 //////////////////////////////////////
