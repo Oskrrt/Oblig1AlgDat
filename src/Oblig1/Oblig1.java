@@ -174,12 +174,60 @@ public class Oblig1 {
 
     ///// Oppgave 7 //////////////////////////////////////
     /// 7a)
+    // ABC og DEFGH
+    // vil ha: ADBECFGH
     public static String flett(String s, String t) {
-        throw new UnsupportedOperationException();
+        char[] a = s.toCharArray();
+        char[] b = t.toCharArray();
+        char[] c = new char[a.length + b.length];
+        int smallestLength = Math.min(a.length, b.length);
+        int indeksA = 0;
+        int indeksB = 0;
+
+        //fyll alle partalls-indekser med tegnene fra string en
+            for (int i = 0; i < c.length; i+=2){
+                if (indeksA < a.length){
+                    if (indeksA == smallestLength) {
+                        break;
+                    }
+                    c[i] = a[indeksA];
+                }
+                indeksA++;
+            }
+
+            //fyll alle oddetall med tegnene fra string to.
+            for (int i = 1; i < c.length; i+=2){
+                if (indeksB < b.length){
+                    if (indeksB == smallestLength) {
+                        break;
+                    }
+                    c[i] = b[indeksB];
+                }
+                indeksB++;
+                System.out.println(indeksB);
+            }
+
+            //partall- og oddetallsloopene breaker dersom man ankommer stedet i arrayet hvor det kun er tomme plasser igjen
+            //her loopes det gjennom c[] en gang til, og fyller resterende plasser, basert på hvilket array som er størst (altså hvilket array som vil ha "rest-bokstaver")
+
+            for (int i = 0; i < c.length; i++){
+                if (!Character.isLetter(c[i])){
+                    if(a.length < b.length){
+                        c[i] = b[indeksB];
+                        indeksB++;
+                    } else {
+                        c[i] = a[indeksA];
+                        indeksA++;
+                    }
+
+                }
+            }
+        return new String(c);
     }
 
     /// 7b)
     public static String flett(String... s) {
+        int arrayCount = s.length;
         throw new UnsupportedOperationException();
     }
 

@@ -18,5 +18,19 @@ public class Main {
         Oblig1.delsortering(new int[] {6, 10, 9, 4, 1, 3, 8, 5, 2, 7});
 
         System.out.println(Arrays.toString(Oblig1.indekssortering(new int[] {6,10,16,11,7,12,3,9,8,5})));
+
+
+        String flett1 = "ABC";
+        String flett2 = "DEFGHIJKLMNOP";
+        Oblig1.flett(flett1, flett2);
+        System.out.println("\n");
+        String flett3 = "IJKLMN";
+        String flett4 = "OPQ";
+        Oblig1.flett(flett3, flett4);
+        System.out.println("\n");
+        String flett5 = "";
+        String flett6 ="AB";
+        Oblig1.flett(flett5, flett6);
+
     }
 }
