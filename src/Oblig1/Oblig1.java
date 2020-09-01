@@ -103,11 +103,40 @@ public class Oblig1 {
     ///// Oppgave 4 //////////////////////////////////////
     // 6, 10, 9, 4, 1, 3, 8, 5, 2, 7
     public static void delsortering(int[] a) {
-        int begin = 1;
+        int begin = 0;
         int end = a.length;
-        System.out.println(end);
+
+        int left = 0;
+        int right = end-1;
+        int partall = 0;
+        int oddetall = 0;
+        System.out.println(Arrays.toString(a));
+
+        while(left < right) {
+            if(a[left] % 2 == 1) {
+                left++;
+            } else {
+                partall = a[left];
+            }
+            if (a[right] % 2 == 0) {
+                right--;
+            } else {
+                oddetall = a[right];
+            }
+            a[left] = oddetall;
+            a[right] = partall;
+
+            left++;
+            right--;
+            System.out.println(left+"..."+right);
+            System.out.println(Arrays.toString(a));
+
+        }
+
+
+        System.out.println(Arrays.toString(a));
         // bruker insertion sort for å sortere hele listen
-        for (int i = begin; i < end; i++) {
+        /*for (int i = begin; i < end; i++) {
            int key = a[i];
            int j = i-1;
            while(j>=0 && a[j]>key) {
@@ -117,16 +146,19 @@ public class Oblig1 {
            a[j+1] = key;
         }
         int antallOddetall = 0;
-        for (int i = begin; i < end; i++) {
-            if (a[i] % 2 == 0) {
+        System.out.println(Arrays.toString(a));
+        for (int i = 0; i < end; i++) {
+            if (a[i] % 2 != 0) {
+                int temp = a[i];
+                a[i] = a[end-1-i];
+                a[end-1-i] = temp;
                 antallOddetall++;
-
             } else {
 
             }
-        }
-        System.out.println(antallOddetall);
-        System.out.println(Arrays.toString(a));
+        }*/
+        //System.out.println(antallOddetall);
+        //System.out.println(Arrays.toString(a));
     }
 
     ///// Oppgave 5 //////////////////////////////////////
@@ -169,4 +201,32 @@ public class Oblig1 {
         throw new UnsupportedOperationException();
     }
 
+
+
+}
+
+class helperClass {
+    public static void quicksort(int[] a, int begin, int end) {
+        if (begin + 1 == end) return;
+        int p = byttPivotBakerst(a, begin, end);
+        int q = partisjoner(a, p, begin, end);
+        byttPivotTilbake(a, end, q);
+        quicksort(a, begin, q);
+        quicksort(a, q+1, end);
+    }
+
+    public static int byttPivotBakerst(int[] a, int begin, int end) {
+        int p = a[end/2];
+        int temp = a[end-1];
+        a[end-1] = p;
+        return 0;
+    }
+
+    public static int partisjoner(int[] a, int pivot, int begin, int end) {
+        return 0;
+    }
+
+    public static int byttPivotTilbake(int[] a, int end, int q) {
+        return 0;
+    }
 }

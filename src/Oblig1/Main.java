@@ -12,7 +12,7 @@ public class Main {
         //int m = Oblig1.maks(a);
         //System.out.println("Støste tallet er " + m);
         System.out.println(Oblig1.ombyttinger(a));
-        System.out.println(Oblig1.antallUlikeUsortert(new int[] {5, 3, 7, 4, 3, 5, 7, 8, 6, 7}));
+        System.out.println("antall ulike usortert : "+Oblig1.antallUlikeUsortert(new int[] {5, 3, 7, 4, 3, 5, 7, 8, 6, 7}));
         Oblig1.delsortering(new int[] {6, 10, 9, 4, 1, 3, 8, 5, 2, 7});
     }
 }
