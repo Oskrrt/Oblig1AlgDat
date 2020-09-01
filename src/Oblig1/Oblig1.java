@@ -120,6 +120,7 @@ public class Oblig1 {
             }
             if (a[right] % 2 == 0) {
                 right--;
+
             } else {
                 oddetall = a[right];
             }
@@ -183,8 +184,20 @@ public class Oblig1 {
     }
 
     ///// Oppgave 8 //////////////////////////////////////
+    // 6,10,16,11,7,12,3,9,8,5
     public static int[] indekssortering(int[] a) {
-        throw new UnsupportedOperationException();
+        int[] c = new int[a.length];
+        System.arraycopy(a, 0, c, 0, 10);
+        Arrays.sort(c);
+        int[] b = new int[a.length];
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < c.length; j++) {
+                if (c[i] == a[j]) {
+                    b[i] = j;
+                }
+            }
+        }
+        return b;
     }
 
     ///// Oppgave 9 //////////////////////////////////////
