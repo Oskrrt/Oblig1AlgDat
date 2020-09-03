@@ -47,5 +47,15 @@ public class Main {
         //"AM "​,​"L"​,​"GEDS"​,​"ORATKRR"​,​""​,​"R TRTE"​,​"IO"​,​"TGAUU"​
         Oblig1.flett("AM ", "L", "GEDS", "ORATKRR", "", "R TRTE", "IO", "TGAUU");
 
+/*
+        char[] a1 = "ABBA".toCharArray();
+        char[] b1 = "BARBARER".toCharArray();
+        char[] c1 = "BARBERER".toCharArray();
+
+        System.out.println(Oblig1.inneholdt(a1, b1));
+        System.out.println(Oblig1.inneholdt());
+*/
+        System.out.println(Oblig1.inneholdt("22", "23"));
+
     }
 }
