@@ -182,9 +182,8 @@ public class Oblig1 {
         int indeksA = 0;
         int indeksB = 0;
 
-        //abc defgh
         for(int i = 0; i<c.length; i++){
-            if(indeksA != smallestLength || indeksB != smallestLength){
+            if(indeksA < smallestLength || indeksB < smallestLength){
                 if (i % 2 == 0){
                     c[i] = a[indeksA];
                     indeksA++;
@@ -193,45 +192,6 @@ public class Oblig1 {
                     indeksB++;
                 }
             } else {
-                if(a.length < b.length){
-                    c[i] = b[indeksB];
-                    indeksB++;
-                } else {
-                    c[i] = a[indeksA];
-                    indeksA++;
-                }
-            }
-
-            System.out.println(c[i]);
-        }
-
-
-        //fyll alle partalls-indekser med tegnene fra string nr en
-            /*for (int i = 0; i < c.length; i+=2){
-                    if (indeksA < a.length){
-                        if (indeksA == smallestLength) {
-                            break;
-                        }
-                        c[i] = a[indeksA];
-                    }
-                    indeksA++;
-                }
-
-                //fyll alle oddetall med tegnene fra string to.
-                for (int i = 1; i < c.length; i+=2){
-                    if (indeksB < b.length){
-                        if (indeksB == smallestLength) {
-                            break;
-                        }
-                        c[i] = b[indeksB];
-                    }
-                    indeksB++;
-                }
-
-                //partall- og oddetallsloopene breaker dersom man ankommer stedet i arrayet hvor det kun er tomme plasser igjen
-                //her loopes det gjennom c[] en gang til, og fyller resterende plasser, basert på hvilket array som er størst (altså hvilket array som vil ha "rest-bokstaver")
-
-                for (int i = 0; i < c.length; i++){
                     if (!Character.isLetter(c[i])){
                         if(a.length < b.length){
                             c[i] = b[indeksB];
@@ -240,10 +200,9 @@ public class Oblig1 {
                             c[i] = a[indeksA];
                             indeksA++;
                         }
-
                     }
-            }*/
-        System.out.println(new String(c));
+            }
+        }
         return new String(c);
     }
 
