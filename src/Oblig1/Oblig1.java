@@ -226,25 +226,33 @@ public class Oblig1 {
         return new String(c);
     }
 
-    //Lag metoden ​public​​s tatic​ String ​flett ​(String...s)​. Den skal «flette» sammen tegnstrengene i ​s​.
-    // Husk at ​s​ nå er en tabell av tegnstrenger. I koden vil derfor ​s[0]​ være første streng i tabellen ​s​, osv.
-    // Flett ingen skal være slik: Først hentes fortløpende det første tegnet fra hver tegnstreng, deretter
-    // fortløpende det andre tegnet, osv.De tegnstrengene som er «brukt opp», dvs. vi er ferdige med alle tegnene der, hoppes over.
-    // Resultatet skal returneres.
-    // Flg. eksempel viser hvordan den skal virke:
-/*
-    // flett("AM ", "L", "GEDS", "ORATKRR", "", "R TRTE", "IO", "TGAUU");
-    // out: ALGORITMER OG DATASTRUKTURER
     /// 7b)
     public static String flett(String... s) {
-        for (int i = 0; i < s.length; i++){
-            char[] currentChars = s[i].toCharArray();
-            System.out.println(currentChars[i]);
+        //hvilken indeks vi er interesserte i (den første bokstaven i arrayet, den andre bokstaven osv)
+        int relevantCharPosition = 0;
+
+        //antall arrays vi har hentet alle karakterene fra
+        int numberOfFinishedArrays = 0;
+        StringBuilder out = new StringBuilder();
+
+        //mens det fortsatt finnes minst ett array med bokstaver vi skal hente ut
+        while (numberOfFinishedArrays < s.length){
+            for (int i = 0; i < s.length; i++) {
+                char[] currentChars = s[i].toCharArray();
+                if (currentChars.length > relevantCharPosition) {
+                    numberOfFinishedArrays = 0;
+                    out.append(currentChars[relevantCharPosition]);
+                } else {
+                    numberOfFinishedArrays++;
+                }
+            }
+            relevantCharPosition++;
         }
-        //throw new UnsupportedOperationException();
-        return null;
-    }
-*/
+        return out.toString();
+        }
+
+
+
     ///// Oppgave 8 //////////////////////////////////////
     // 6,10,16,11,7,12,3,9,8,5
     public static int[] indekssortering(int[] a) {
@@ -293,6 +301,7 @@ public class Oblig1 {
         }
     }
 
+}
 
 class helperClass {
     public static void quicksort(int[] a, int begin, int end) {
