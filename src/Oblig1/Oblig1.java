@@ -232,7 +232,7 @@ public class Oblig1 {
     // fortløpende det andre tegnet, osv.De tegnstrengene som er «brukt opp», dvs. vi er ferdige med alle tegnene der, hoppes over.
     // Resultatet skal returneres.
     // Flg. eksempel viser hvordan den skal virke:
-
+/*
     // flett("AM ", "L", "GEDS", "ORATKRR", "", "R TRTE", "IO", "TGAUU");
     // out: ALGORITMER OG DATASTRUKTURER
     /// 7b)
@@ -244,7 +244,7 @@ public class Oblig1 {
         //throw new UnsupportedOperationException();
         return null;
     }
-
+*/
     ///// Oppgave 8 //////////////////////////////////////
     // 6,10,16,11,7,12,3,9,8,5
     public static int[] indekssortering(int[] a) {
@@ -273,40 +273,26 @@ public class Oblig1 {
     }
 
     public static boolean inneholdt(String a, String b) {
-        /*
-        char[] array = a.toCharArray();
-        for (char c : array){
-            System.out.println(c);
+            char [] chars = a.toCharArray();
+            char [] chars1 = b.toCharArray();
+
+            if (a.length() > b.length()){
+                return false;
+            }
+
+            int[] Aarr = new int[256], Barr = new int[256];  // hjelpetabell med lenge 256, virker også hvis a og b inneholder andre tegn
+
+             for (char c : chars) Aarr[c]++;     // teller opp tegnene i a
+             for (char c : chars1) Barr[c]++;     // teller opp tegnene i b
+
+            for (int i = 0; i < 256; i++){
+                if (Aarr[i] > Barr[i]) return false;
+            }
+
+            return true;
         }
-        char[] array2 = b.toCharArray();
-        for (char d : array2){
-            System.out.println(d);
-        }
+    }
 
-        if (a.length() > b.length()){
-            return false;
-        }
-
-        for (int i = 0; i < a.length(); i++) {
-            char tegn = array[i];  // ser på alle tegnene i a
-
-            int aAntall = 0;   // hvor mange ganger finnes tegnet i a?
-            for (int j = 0; j < a.length(); j++) if (array[j] == tegn) aAntall++;
-
-            int bAntall = 0;   // hvor mange ganger finnes tegnet i b?
-            for (int j = 0; j < b.length(); j++) if (array2[j] == tegn) bAntall++;
-
-            if (aAntall > bAntall) return false;
-        }
-
-        return true;
-      }
-
-
-}
-*/
-
-}
 
 class helperClass {
     public static void quicksort(int[] a, int begin, int end) {

@@ -1,5 +1,7 @@
 package Oblig1;
 
+
+
 import java.util.Arrays;
 
 public class Main {
@@ -45,17 +47,11 @@ public class Main {
         Oblig1.flett(flett5, flett6);
 
         //"AM "​,​"L"​,​"GEDS"​,​"ORATKRR"​,​""​,​"R TRTE"​,​"IO"​,​"TGAUU"​
-        System.out.println(Oblig1.flett("AM ", "L", "GEDS", "ORATKRR", "", "R TRTE", "IO", "TGAUU"));
+        //System.out.println(Oblig1.flett("AM ", "L", "GEDS", "ORATKRR", "", "R TRTE", "IO", "TGAUU"));
 
-/*
-        char[] a1 = "ABBA".toCharArray();
-        char[] b1 = "BARBARER".toCharArray();
-        char[] c1 = "BARBERER".toCharArray();
 
-        System.out.println(Oblig1.inneholdt(a1, b1));
-        System.out.println(Oblig1.inneholdt());
-*/
-        System.out.println(Oblig1.inneholdt("22", "23"));
+        System.out.print(Oblig1.inneholdt("ABBA", "RABARBARA"));
+
 
     }
 }
