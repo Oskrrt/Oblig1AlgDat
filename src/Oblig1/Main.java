@@ -8,6 +8,7 @@ public class Main {
         System.out.println("hei");
         // dette er en test
 
+        System.out.println("jajajaja");
         System.out.println(Oblig1.antallUlikeSortert(new int[]{1,2,2,3,5,5,5,5,9}));
 
         int[] a = new int[]{1, 2, 3, 11, 5, 6, 7, 8, 9};
