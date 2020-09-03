@@ -1,5 +1,6 @@
 package Oblig1;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
@@ -206,10 +207,23 @@ public class Oblig1 {
         return new String(c);
     }
 
+    //Lag metoden ​public​​s tatic​ String ​flett ​(String...s)​. Den skal «flette» sammen tegnstrengene i ​s​.
+    // Husk at ​s​ nå er en tabell av tegnstrenger. I koden vil derfor ​s[0]​ være første streng i tabellen ​s​, osv.
+    // Flett ingen skal være slik: Først hentes fortløpende det første tegnet fra hver tegnstreng, deretter
+    // fortløpende det andre tegnet, osv.De tegnstrengene som er «brukt opp», dvs. vi er ferdige med alle tegnene der, hoppes over.
+    // Resultatet skal returneres.
+    // Flg. eksempel viser hvordan den skal virke:
+
+    // flett("AM ", "L", "GEDS", "ORATKRR", "", "R TRTE", "IO", "TGAUU");
+    // out: ALGORITMER OG DATASTRUKTURER
     /// 7b)
     public static String flett(String... s) {
-
-        throw new UnsupportedOperationException();
+        for (int i = 0; i < s.length; i++){
+            char[] currentChars = s[i].toCharArray();
+            System.out.println(currentChars[i]);
+        }
+        //throw new UnsupportedOperationException();
+        return null;
     }
 
     ///// Oppgave 8 //////////////////////////////////////

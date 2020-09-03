@@ -31,5 +31,8 @@ public class Main {
         String flett6 ="AB";
         Oblig1.flett(flett5, flett6);
 
+        //"AM "​,​"L"​,​"GEDS"​,​"ORATKRR"​,​""​,​"R TRTE"​,​"IO"​,​"TGAUU"​
+        Oblig1.flett("AM ", "L", "GEDS", "ORATKRR", "", "R TRTE", "IO", "TGAUU");
+
     }
 }
