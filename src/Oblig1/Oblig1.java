@@ -53,14 +53,14 @@ public class Oblig1 {
         int begin = 0;
         int end = a.length;
         // sjekker om arrayet er sortert stigende
-        for (int i = begin; i < end-1; i++) {
-            if (a[i] > a[i+1]) {
+        for (int i = begin; i < end - 1; i++) {
+            if (a[i] > a[i + 1]) {
                 throw new IllegalStateException("Arrayet er ikke sortert");
             }
         }
         int antallUlike = 1;
         int temp = a[begin];
-        for (int i = begin+1; i < end; i++) {
+        for (int i = begin + 1; i < end; i++) {
             if (a[i] != temp) {
                 antallUlike++;
                 temp = a[i];
@@ -79,16 +79,16 @@ public class Oblig1 {
         boolean funnetTidligere = false;
 
         // Løper gjennom listen fra index 1 og sammenligner a[i] med a[-1], hvis de er forskjellige går den inn i neste løkke
-        for (int i = begin+1; i < end; i++) {
+        for (int i = begin + 1; i < end; i++) {
             if (a[i] != temp) {
                 // lagrer verdien i hjelpe variabel
                 int helper = a[i];
                 // løper gjennom listen fra der den fant et tall som var forskjellig og sjekker alle tallene forran om dette tallet finnes fra før, ved hjelp av en for-løkke som teller bakover
-                for (int j = i-1; j >= begin; j--) {
+                for (int j = i - 1; j >= begin; j--) {
                     if (helper == a[j]) { // hvis tallet er funnet fra før så gå ut av loopen
                         funnetTidligere = true;
                         break;
-                    } else if(helper != a[j]) { //hvis tallet ikke er funnet fra før, setter bool'en til false og plusser senere 1 på antallUlike
+                    } else if (helper != a[j]) { //hvis tallet ikke er funnet fra før, setter bool'en til false og plusser senere 1 på antallUlike
                         funnetTidligere = false;
                     }
                 }
@@ -108,13 +108,13 @@ public class Oblig1 {
         int end = a.length;
 
         int left = 0;
-        int right = end-1;
+        int right = end - 1;
         int partall = 0;
         int oddetall = 0;
         System.out.println(Arrays.toString(a));
 
-        while(left < right) {
-            if(a[left] % 2 == 1) {
+        while (left < right) {
+            if (a[left] % 2 == 1) {
                 left++;
             } else {
                 partall = a[left];
@@ -130,7 +130,7 @@ public class Oblig1 {
 
             left++;
             right--;
-            System.out.println(left+"..."+right);
+            System.out.println(left + "..." + right);
             System.out.println(Arrays.toString(a));
 
         }
@@ -202,9 +202,9 @@ public class Oblig1 {
         int indeksA = 0;
         int indeksB = 0;
 
-        for(int i = 0; i<c.length; i++){
-            if(indeksA < smallestLength || indeksB < smallestLength){
-                if (i % 2 == 0){
+        for (int i = 0; i < c.length; i++) {
+            if (indeksA < smallestLength || indeksB < smallestLength) {
+                if (i % 2 == 0) {
                     c[i] = a[indeksA];
                     indeksA++;
                 } else {
@@ -212,38 +212,42 @@ public class Oblig1 {
                     indeksB++;
                 }
             } else {
-                    if (!Character.isLetter(c[i])){
-                        if(a.length < b.length){
-                            c[i] = b[indeksB];
-                            indeksB++;
-                        } else {
-                            c[i] = a[indeksA];
-                            indeksA++;
-                        }
+                if (!Character.isLetter(c[i])) {
+                    if (a.length < b.length) {
+                        c[i] = b[indeksB];
+                        indeksB++;
+                    } else {
+                        c[i] = a[indeksA];
+                        indeksA++;
                     }
+                }
             }
         }
         return new String(c);
     }
 
-    //Lag metoden ​public​​s tatic​ String ​flett ​(String...s)​. Den skal «flette» sammen tegnstrengene i ​s​.
-    // Husk at ​s​ nå er en tabell av tegnstrenger. I koden vil derfor ​s[0]​ være første streng i tabellen ​s​, osv.
-    // Flett ingen skal være slik: Først hentes fortløpende det første tegnet fra hver tegnstreng, deretter
-    // fortløpende det andre tegnet, osv.De tegnstrengene som er «brukt opp», dvs. vi er ferdige med alle tegnene der, hoppes over.
-    // Resultatet skal returneres.
-    // Flg. eksempel viser hvordan den skal virke:
-
-    // flett("AM ", "L", "GEDS", "ORATKRR", "", "R TRTE", "IO", "TGAUU");
-    // out: ALGORITMER OG DATASTRUKTURER
     /// 7b)
     public static String flett(String... s) {
-        for (int i = 0; i < s.length; i++){
-            char[] currentChars = s[i].toCharArray();
-            System.out.println(currentChars[i]);
+        int relevantCharPosition = 0;
+        int numberOfFinishedArrays = 0;
+        StringBuilder out = new StringBuilder();
+
+        while (numberOfFinishedArrays < s.length){
+            for (int i = 0; i < s.length; i++) {
+                char[] currentChars = s[i].toCharArray();
+                if (currentChars.length > relevantCharPosition) {
+                    numberOfFinishedArrays = 0;
+                    out.append(currentChars[relevantCharPosition]);
+                } else {
+                    numberOfFinishedArrays++;
+                }
+            }
+            relevantCharPosition++;
         }
-        //throw new UnsupportedOperationException();
-        return null;
-    }
+        return out.toString();
+        }
+
+
 
     ///// Oppgave 8 //////////////////////////////////////
     // 6,10,16,11,7,12,3,9,8,5
