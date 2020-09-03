@@ -21,13 +21,11 @@ public class Main {
 
 
         String flett1 = "ABC";
-        String flett2 = "DEFGHIJKLMNOP";
+        String flett2 = "DEFGH";
         Oblig1.flett(flett1, flett2);
-        System.out.println("\n");
         String flett3 = "IJKLMN";
         String flett4 = "OPQ";
         Oblig1.flett(flett3, flett4);
-        System.out.println("\n");
         String flett5 = "";
         String flett6 ="AB";
         Oblig1.flett(flett5, flett6);
