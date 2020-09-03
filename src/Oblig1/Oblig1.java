@@ -237,26 +237,13 @@ public class Oblig1 {
     // out: ALGORITMER OG DATASTRUKTURER
     /// 7b)
     public static String flett(String... s) {
-        int relevantCharPosition = 0;
-        int numberOfFinishedArrays = 0;
-        StringBuilder out = new StringBuilder();
-
-        while (numberOfFinishedArrays < s.length){
-            for (int i = 0; i < s.length; i++) {
-                char[] currentChars = s[i].toCharArray();
-                if (currentChars.length > relevantCharPosition) {
-                    numberOfFinishedArrays = 0;
-                    out.append(currentChars[relevantCharPosition]);
-                } else {
-                    numberOfFinishedArrays++;
-                }
-            }
-            relevantCharPosition++;
+        for (int i = 0; i < s.length; i++){
+            char[] currentChars = s[i].toCharArray();
+            System.out.println(currentChars[i]);
         }
-        return out.toString();
-        }
-
-
+        //throw new UnsupportedOperationException();
+        return null;
+    }
 
     ///// Oppgave 8 //////////////////////////////////////
     // 6,10,16,11,7,12,3,9,8,5
@@ -286,10 +273,38 @@ public class Oblig1 {
     }
 
     public static boolean inneholdt(String a, String b) {
-        throw new UnsupportedOperationException();
-    }
+        /*
+        char[] array = a.toCharArray();
+        for (char c : array){
+            System.out.println(c);
+        }
+        char[] array2 = b.toCharArray();
+        for (char d : array2){
+            System.out.println(d);
+        }
+
+        if (a.length() > b.length()){
+            return false;
+        }
+
+        for (int i = 0; i < a.length(); i++) {
+            char tegn = array[i];  // ser på alle tegnene i a
+
+            int aAntall = 0;   // hvor mange ganger finnes tegnet i a?
+            for (int j = 0; j < a.length(); j++) if (array[j] == tegn) aAntall++;
+
+            int bAntall = 0;   // hvor mange ganger finnes tegnet i b?
+            for (int j = 0; j < b.length(); j++) if (array2[j] == tegn) bAntall++;
+
+            if (aAntall > bAntall) return false;
+        }
+
+        return true;
+      }
 
 
+}
+*/
 
 }
 
