@@ -53,14 +53,14 @@ public class Oblig1 {
         int begin = 0;
         int end = a.length;
         // sjekker om arrayet er sortert stigende
-        for (int i = begin; i < end - 1; i++) {
-            if (a[i] > a[i + 1]) {
+        for (int i = begin; i < end-1; i++) {
+            if (a[i] > a[i+1]) {
                 throw new IllegalStateException("Arrayet er ikke sortert");
             }
         }
         int antallUlike = 1;
         int temp = a[begin];
-        for (int i = begin + 1; i < end; i++) {
+        for (int i = begin+1; i < end; i++) {
             if (a[i] != temp) {
                 antallUlike++;
                 temp = a[i];
@@ -79,16 +79,16 @@ public class Oblig1 {
         boolean funnetTidligere = false;
 
         // Løper gjennom listen fra index 1 og sammenligner a[i] med a[-1], hvis de er forskjellige går den inn i neste løkke
-        for (int i = begin + 1; i < end; i++) {
+        for (int i = begin+1; i < end; i++) {
             if (a[i] != temp) {
                 // lagrer verdien i hjelpe variabel
                 int helper = a[i];
                 // løper gjennom listen fra der den fant et tall som var forskjellig og sjekker alle tallene forran om dette tallet finnes fra før, ved hjelp av en for-løkke som teller bakover
-                for (int j = i - 1; j >= begin; j--) {
+                for (int j = i-1; j >= begin; j--) {
                     if (helper == a[j]) { // hvis tallet er funnet fra før så gå ut av loopen
                         funnetTidligere = true;
                         break;
-                    } else if (helper != a[j]) { //hvis tallet ikke er funnet fra før, setter bool'en til false og plusser senere 1 på antallUlike
+                    } else if(helper != a[j]) { //hvis tallet ikke er funnet fra før, setter bool'en til false og plusser senere 1 på antallUlike
                         funnetTidligere = false;
                     }
                 }
@@ -108,13 +108,13 @@ public class Oblig1 {
         int end = a.length;
 
         int left = 0;
-        int right = end - 1;
+        int right = end-1;
         int partall = 0;
         int oddetall = 0;
         System.out.println(Arrays.toString(a));
 
-        while (left < right) {
-            if (a[left] % 2 == 1) {
+        while(left < right) {
+            if(a[left] % 2 == 1) {
                 left++;
             } else {
                 partall = a[left];
@@ -130,7 +130,7 @@ public class Oblig1 {
 
             left++;
             right--;
-            System.out.println(left + "..." + right);
+            System.out.println(left+"..."+right);
             System.out.println(Arrays.toString(a));
 
         }
@@ -167,7 +167,7 @@ public class Oblig1 {
     public static void rotasjon(char[] a) {
         if (a.length >= 2) {
             char c = a[a.length - 1];
-            for (int i = a.length - 1; i >= 1; --i) {
+            for(int i = a.length - 1; i >= 1; --i) {
                 a[i] = a[i - 1];
             }
             a[0] = c;
@@ -177,19 +177,19 @@ public class Oblig1 {
 
     ///// Oppgave 6 //////////////////////////////////////
     public static void rotasjon(char[] a, int k) {
-        int n = a.length;
-        if (n < 2) {
-            return;
+            int n = a.length;
+            if (n < 2){
+                return;
+            }
+            if ((k %= n) < 0){
+                k += n;
+            }
+            char[] b = Arrays.copyOfRange(a, n - k, n);
+            for (int i = n - 1; i >= k; i--){
+                a[i] = a[i - k];
+            }
+            System.arraycopy(b, 0, a, 0, k);
         }
-        if ((k %= n) < 0) {
-            k += n;
-        }
-        char[] b = Arrays.copyOfRange(a, n - k, n);
-        for (int i = n - 1; i >= k; i--) {
-            a[i] = a[i - k];
-        }
-        System.arraycopy(b, 0, a, 0, k);
-    }
 
 
     ///// Oppgave 7 //////////////////////////////////////
@@ -202,9 +202,9 @@ public class Oblig1 {
         int indeksA = 0;
         int indeksB = 0;
 
-        for (int i = 0; i < c.length; i++) {
-            if (indeksA < smallestLength || indeksB < smallestLength) {
-                if (i % 2 == 0) {
+        for(int i = 0; i<c.length; i++){
+            if(indeksA < smallestLength || indeksB < smallestLength){
+                if (i % 2 == 0){
                     c[i] = a[indeksA];
                     indeksA++;
                 } else {
@@ -212,15 +212,15 @@ public class Oblig1 {
                     indeksB++;
                 }
             } else {
-                if (!Character.isLetter(c[i])) {
-                    if (a.length < b.length) {
-                        c[i] = b[indeksB];
-                        indeksB++;
-                    } else {
-                        c[i] = a[indeksA];
-                        indeksA++;
+                    if (!Character.isLetter(c[i])){
+                        if(a.length < b.length){
+                            c[i] = b[indeksB];
+                            indeksB++;
+                        } else {
+                            c[i] = a[indeksA];
+                            indeksA++;
+                        }
                     }
-                }
             }
         }
         return new String(c);
@@ -237,13 +237,26 @@ public class Oblig1 {
     // out: ALGORITMER OG DATASTRUKTURER
     /// 7b)
     public static String flett(String... s) {
-        for (int i = 0; i < s.length; i++) {
-            char[] currentChars = s[i].toCharArray();
-            System.out.println(currentChars[i]);
+        int relevantCharPosition = 0;
+        int numberOfFinishedArrays = 0;
+        StringBuilder out = new StringBuilder();
+
+        while (numberOfFinishedArrays < s.length){
+            for (int i = 0; i < s.length; i++) {
+                char[] currentChars = s[i].toCharArray();
+                if (currentChars.length > relevantCharPosition) {
+                    numberOfFinishedArrays = 0;
+                    out.append(currentChars[relevantCharPosition]);
+                } else {
+                    numberOfFinishedArrays++;
+                }
+            }
+            relevantCharPosition++;
         }
-        //throw new UnsupportedOperationException();
-        return null;
-    }
+        return out.toString();
+        }
+
+
 
     ///// Oppgave 8 //////////////////////////////////////
     // 6,10,16,11,7,12,3,9,8,5
@@ -276,63 +289,32 @@ public class Oblig1 {
         throw new UnsupportedOperationException();
     }
 
-        /*
-        char[] array = a.toCharArray();
-        for (char c : array){
-            System.out.println(c);
-        }
-        char[] array2 = b.toCharArray();
-        for (char d : array2){
-            System.out.println(d);
-        }
-
-        if (a.length() > b.length()){
-            return false;
-        }
-
-        for (int i = 0; i < a.length(); i++) {
-            char tegn = array[i];  // ser på alle tegnene i a
-
-            int aAntall = 0;   // hvor mange ganger finnes tegnet i a?
-            for (int j = 0; j < a.length(); j++) if (array[j] == tegn) aAntall++;
-
-            int bAntall = 0;   // hvor mange ganger finnes tegnet i b?
-            for (int j = 0; j < b.length(); j++) if (array2[j] == tegn) bAntall++;
-
-            if (aAntall > bAntall) return false;
-        }
-
-        return true;
-      }
 
 
 }
-*/
 
+class helperClass {
+    public static void quicksort(int[] a, int begin, int end) {
+        if (begin + 1 == end) return;
+        int p = byttPivotBakerst(a, begin, end);
+        int q = partisjoner(a, p, begin, end);
+        byttPivotTilbake(a, end, q);
+        quicksort(a, begin, q);
+        quicksort(a, q+1, end);
+    }
 
-    class helperClass {
-        public static void quicksort(int[] a, int begin, int end) {
-            if (begin + 1 == end) return;
-            int p = byttPivotBakerst(a, begin, end);
-            int q = partisjoner(a, p, begin, end);
-            byttPivotTilbake(a, end, q);
-            quicksort(a, begin, q);
-            quicksort(a, q + 1, end);
-        }
+    public static int byttPivotBakerst(int[] a, int begin, int end) {
+        int p = a[end/2];
+        int temp = a[end-1];
+        a[end-1] = p;
+        return 0;
+    }
 
-        public static int byttPivotBakerst(int[] a, int begin, int end) {
-            int p = a[end / 2];
-            int temp = a[end - 1];
-            a[end - 1] = p;
-            return 0;
-        }
+    public static int partisjoner(int[] a, int pivot, int begin, int end) {
+        return 0;
+    }
 
-        public static int partisjoner(int[] a, int pivot, int begin, int end) {
-            return 0;
-        }
-
-        public static int byttPivotTilbake(int[] a, int end, int q) {
-            return 0;
-        }
+    public static int byttPivotTilbake(int[] a, int end, int q) {
+        return 0;
     }
 }
