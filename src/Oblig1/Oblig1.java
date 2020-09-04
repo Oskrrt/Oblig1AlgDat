@@ -333,7 +333,7 @@ public class Oblig1 {
         }
     }
 
-}
+
 
 class helperClass {
     public static void quicksort(int[] a, int begin, int end) {
