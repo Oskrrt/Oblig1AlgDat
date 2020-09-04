@@ -268,7 +268,39 @@ public class Oblig1 {
 
     ///// Oppgave 9 //////////////////////////////////////
     public static int[] tredjeMin(int[] a) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        if(a.length < 4){
+            throw new UnsupportedOperationException();
+        }
+        int minsteVerdi = Integer.MAX_VALUE;
+        int nm1 = Integer.MAX_VALUE;
+        int nm2 = Integer.MAX_VALUE;
+        int nm3 = Integer.MAX_VALUE;
+
+        int n = a.length;     // tabellens lengde
+        if (n < 4) throw      // må ha minst fire verdier
+                new java.util.NoSuchElementException("a.length(" + n + ") < 3!");
+
+        for (int i = 0; i < n; i++)     //Loop n-2 ganger
+        {
+            if(a[i] < minsteVerdi){
+                nm3 = nm2;
+                nm2 = nm1;
+                nm1 = minsteVerdi;
+                minsteVerdi = a[i];
+            }else if(a[i] < nm1){
+                nm3 = nm2;
+                nm2 = nm1;
+                nm1 = a[i];
+            } else if(a[i] < nm2){
+                nm3 = nm2;
+                nm2 = a[i];
+            }else if(a[i] < nm3){
+                nm3 = a[i];
+            }
+        }
+
+        return new int[]{nm1,nm2,nm3};    // nest minste tall i 0 pos, neste nm i 1 pos og neste neste nm i pos 2
     }
 
     ///// Oppgave 10 //////////////////////////////////////
