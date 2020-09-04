@@ -53,14 +53,14 @@ public class Oblig1 {
         int begin = 0;
         int end = a.length;
         // sjekker om arrayet er sortert stigende
-        for (int i = begin; i < end - 1; i++) {
-            if (a[i] > a[i + 1]) {
+        for (int i = begin; i < end-1; i++) {
+            if (a[i] > a[i+1]) {
                 throw new IllegalStateException("Arrayet er ikke sortert");
             }
         }
         int antallUlike = 1;
         int temp = a[begin];
-        for (int i = begin + 1; i < end; i++) {
+        for (int i = begin+1; i < end; i++) {
             if (a[i] != temp) {
                 antallUlike++;
                 temp = a[i];
@@ -79,16 +79,16 @@ public class Oblig1 {
         boolean funnetTidligere = false;
 
         // Løper gjennom listen fra index 1 og sammenligner a[i] med a[-1], hvis de er forskjellige går den inn i neste løkke
-        for (int i = begin + 1; i < end; i++) {
+        for (int i = begin+1; i < end; i++) {
             if (a[i] != temp) {
                 // lagrer verdien i hjelpe variabel
                 int helper = a[i];
                 // løper gjennom listen fra der den fant et tall som var forskjellig og sjekker alle tallene forran om dette tallet finnes fra før, ved hjelp av en for-løkke som teller bakover
-                for (int j = i - 1; j >= begin; j--) {
+                for (int j = i-1; j >= begin; j--) {
                     if (helper == a[j]) { // hvis tallet er funnet fra før så gå ut av loopen
                         funnetTidligere = true;
                         break;
-                    } else if (helper != a[j]) { //hvis tallet ikke er funnet fra før, setter bool'en til false og plusser senere 1 på antallUlike
+                    } else if(helper != a[j]) { //hvis tallet ikke er funnet fra før, setter bool'en til false og plusser senere 1 på antallUlike
                         funnetTidligere = false;
                     }
                 }
@@ -108,13 +108,13 @@ public class Oblig1 {
         int end = a.length;
 
         int left = 0;
-        int right = end - 1;
+        int right = end-1;
         int partall = 0;
         int oddetall = 0;
         System.out.println(Arrays.toString(a));
 
-        while (left < right) {
-            if (a[left] % 2 == 1) {
+        while(left < right) {
+            if(a[left] % 2 == 1) {
                 left++;
             } else {
                 partall = a[left];
@@ -130,7 +130,7 @@ public class Oblig1 {
 
             left++;
             right--;
-            System.out.println(left + "..." + right);
+            System.out.println(left+"..."+right);
             System.out.println(Arrays.toString(a));
 
         }
@@ -202,9 +202,9 @@ public class Oblig1 {
         int indeksA = 0;
         int indeksB = 0;
 
-        for (int i = 0; i < c.length; i++) {
-            if (indeksA < smallestLength || indeksB < smallestLength) {
-                if (i % 2 == 0) {
+        for(int i = 0; i<c.length; i++){
+            if(indeksA < smallestLength || indeksB < smallestLength){
+                if (i % 2 == 0){
                     c[i] = a[indeksA];
                     indeksA++;
                 } else {
@@ -212,15 +212,15 @@ public class Oblig1 {
                     indeksB++;
                 }
             } else {
-                if (!Character.isLetter(c[i])) {
-                    if (a.length < b.length) {
-                        c[i] = b[indeksB];
-                        indeksB++;
-                    } else {
-                        c[i] = a[indeksA];
-                        indeksA++;
+                    if (!Character.isLetter(c[i])){
+                        if(a.length < b.length){
+                            c[i] = b[indeksB];
+                            indeksB++;
+                        } else {
+                            c[i] = a[indeksA];
+                            indeksA++;
+                        }
                     }
-                }
             }
         }
         return new String(c);
@@ -228,10 +228,14 @@ public class Oblig1 {
 
     /// 7b)
     public static String flett(String... s) {
+        //hvilken indeks vi er interesserte i (den første bokstaven i arrayet, den andre bokstaven osv)
         int relevantCharPosition = 0;
+
+        //antall arrays vi har hentet alle karakterene fra
         int numberOfFinishedArrays = 0;
         StringBuilder out = new StringBuilder();
 
+        //mens det fortsatt finnes minst ett array med bokstaver vi skal hente ut
         while (numberOfFinishedArrays < s.length){
             for (int i = 0; i < s.length; i++) {
                 char[] currentChars = s[i].toCharArray();
@@ -309,10 +313,25 @@ public class Oblig1 {
     }
 
     public static boolean inneholdt(String a, String b) {
-        throw new UnsupportedOperationException();
+            char [] chars = a.toCharArray();
+            char [] chars1 = b.toCharArray();
+
+            if (a.length() > b.length()){
+                return false;
+            }
+
+            int[] Aarr = new int[256], Barr = new int[256];  // hjelpetabell med lenge 256, virker også hvis a og b inneholder andre tegn
+
+             for (char c : chars) Aarr[c]++;     // teller opp tegnene i a
+             for (char c : chars1) Barr[c]++;     // teller opp tegnene i b
+
+            for (int i = 0; i < 256; i++){
+                if (Aarr[i] > Barr[i]) return false;
+            }
+
+            return true;
+        }
     }
-
-
 
 }
 
