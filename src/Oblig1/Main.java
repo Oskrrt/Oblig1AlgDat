@@ -46,5 +46,13 @@ public class Main {
         String flett6 ="AB";
         Oblig1.flett(flett5, flett6);
 
+        //"AM "​,​"L"​,​"GEDS"​,​"ORATKRR"​,​""​,​"R TRTE"​,​"IO"​,​"TGAUU"​
+        //System.out.println(Oblig1.flett("AM ", "L", "GEDS", "ORATKRR", "", "R TRTE", "IO", "TGAUU"));
+        System.out.println(Oblig1.flett("AM ", "L", "GEDS", "ORATKRR", "", "R TRTE", "IO", "TGAUU"));
+
+
+        System.out.print(Oblig1.inneholdt("ABBA", "RABARBARA"));
+
+
     }
 }
