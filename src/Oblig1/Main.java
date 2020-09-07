@@ -36,7 +36,7 @@ public class Main {
 
 
         //Tester oppgave 9
-        int[] arr = {55,6,2,21,-3,4,-15};
+        int[] arr = {-12,12,6,-5,4,2};
         System.out.print("Oppgave 9 "+Arrays.toString(Oblig1.tredjeMin(arr)));
 
         String flett1 = "ABC";

@@ -298,39 +298,71 @@ public class Oblig1 {
     ///// Oppgave 9 //////////////////////////////////////
     public static int[] tredjeMin(int[] a) {
         //throw new UnsupportedOperationException();
-        if(a.length < 4){
-            throw new UnsupportedOperationException();
-        }
-        int minsteVerdi = Integer.MAX_VALUE;
-        int nm1 = Integer.MAX_VALUE;
-        int nm2 = Integer.MAX_VALUE;
-        int nm3 = Integer.MAX_VALUE;
-
         int n = a.length;     // tabellens lengde
-        if (n < 4) throw      // må ha minst fire verdier
-                new java.util.NoSuchElementException("a.length(" + n + ") < 3!");
+        if (n < 3) {       // må ha minst fire verdier
+            throw new NoSuchElementException("Det er for få verdier i tabellen");
+        }
 
-        for (int i = 0; i < n; i++)     //Loop n-2 ganger
-        {
-            if(a[i] < minsteVerdi){
-                nm3 = nm2;
-                nm2 = nm1;
-                nm1 = minsteVerdi;
-                minsteVerdi = a[i];
-            }else if(a[i] < nm1){
-                nm3 = nm2;
-                nm2 = nm1;
-                nm1 = a[i];
-            } else if(a[i] < nm2){
-                nm3 = nm2;
-                nm2 = a[i];
-            }else if(a[i] < nm3){
-                nm3 = a[i];
+        int[] treMinste = {a[0], a[1], a[2]};
+
+        int[] c = indekssortering(treMinste);
+
+        int m = c[0];
+        int nm1 = c[1];
+        int nm2 = c[2];
+
+        int minsteVerdi = treMinste[c[0]];
+        int nestMaksVerdi1 = treMinste[c[1]];
+        int nestMaksVerdi2 = treMinste[c[2]];
+
+        for(int i = 3; i< n; i++){
+            if(a[i] < nestMaksVerdi2){
+                if(a[i] < nestMaksVerdi1){
+                    if(a[i] < minsteVerdi){
+                        nm2 = nm1;
+                        nm1 = m;
+                        nestMaksVerdi2 = nestMaksVerdi1;
+                        nestMaksVerdi1 = minsteVerdi;
+                        m = i;
+                        minsteVerdi = a[m];
+                    } else{
+                        nm1 = i;
+                        nestMaksVerdi1 = a[nm1];
+                    }
+                }
+                else{
+                    nm2 = i;
+                    nestMaksVerdi2 = a[nm2];
+                }
             }
         }
-
-        return new int[]{nm1,nm2,nm3};    // nest minste tall i 0 pos, neste nm i 1 pos og neste neste nm i pos 2
+        System.out.println("Oppgave 9");
+        skrivIntln(c);
+        //return new int[]{minsteIndex,nmIndex1,nmIndex2};
+        return new int[]{m,nm1,nm2};
     }
+
+    public static void skrivIntln(int[] a){
+        String string = "";
+        int fra = 0;
+        int til = a.length;
+
+        //fratilKontroll(a.length, fra, til);
+
+        for(int i = fra; i < til;++i){
+
+            if(i != til-1){
+                //ystem.out.print(a[i] +" ");
+                string += a[i] + " ";
+            }
+
+            if(i == til-1){
+                string += a[i] ;
+            }
+        }
+        System.out.print(string + "\n");
+    }
+
 
     ///// Oppgave 10 //////////////////////////////////////
     public static int bokstavNr(char bokstav) {
