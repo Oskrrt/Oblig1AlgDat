@@ -51,8 +51,9 @@ public class Main {
         System.out.println(Oblig1.flett("AM ", "L", "GEDS", "ORATKRR", "", "R TRTE", "IO", "TGAUU"));
 
 
-        System.out.print(Oblig1.inneholdt("ABBA", "RABARBARA"));
+        System.out.println(Oblig1.inneholdt("ABBA", "RABARBARA"));
 
+        System.out.println("Sjekker om git fungerer på begge pcene");
 
     }
 }
