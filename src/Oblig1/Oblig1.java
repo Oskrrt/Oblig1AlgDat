@@ -3,6 +3,7 @@ package Oblig1;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
+import java.util.Random;
 
 public class Oblig1 {
     private Oblig1() {
@@ -31,6 +32,9 @@ public class Oblig1 {
     }
 
 
+    // Når blir det flest ombyttinger?
+    // Når blir det færrest?
+    // Hvor mange blir det i gjennomsnitt?
     public static int ombyttinger(int[] a) {
         int antall = 0;
         //12, 1, 2, 3, 11, 5, 6, 7, 8, 9
@@ -40,10 +44,31 @@ public class Oblig1 {
                 int temp = a[i];
                 a[i] = a[i - 1];
                 a[i - 1] = temp;
-                System.out.println(Arrays.toString(a));
+              //  System.out.println(Arrays.toString(a));
             }
         }
         return antall;
+    }
+
+    //----------------------------------------------------------------------------------------------------
+    public static void bytt(int[] a, int i, int j){
+
+        int temp = a[i]; a[i] = a[j]; a[j] = temp;
+    }
+    public static int[] randPerm(int n){  // en effektiv versjon
+
+        Random r = new Random();         // en randomgenerator
+        int[] a = new int[n];            // en tabell med plass til n tall
+
+        Arrays.setAll(a, i -> i + 1);    // legger inn tallene 1, 2, . , n
+
+        for (int k = n - 1; k > 0; k--)  // løkke som går n - 1 ganger
+        {
+            int i = r.nextInt(k+1);        // en tilfeldig tall fra 0 til k
+            bytt(a,k,i);                   // bytter om
+        }
+
+        return a;                        // permutasjonen returneres
     }
 
 
@@ -257,7 +282,7 @@ public class Oblig1 {
     // 6,10,16,11,7,12,3,9,8,5
     public static int[] indekssortering(int[] a) {
         int[] c = new int[a.length];
-        System.arraycopy(a, 0, c, 0, 10);
+        System.arraycopy(a, 0, c, 0, a.length);
         Arrays.sort(c);
         int[] b = new int[a.length];
         for (int i = 0; i < a.length; i++) {
