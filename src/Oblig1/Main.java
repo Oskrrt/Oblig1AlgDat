@@ -36,10 +36,9 @@ public class Main {
 
 
         //Tester oppgave 9
-        int[] arr = {6,5,1,3,2,4};
         int[] array = Oblig1.randPerm(20);
-        Oblig1.delsortering(arr);
-        System.out.print("Oppgave 9 "+Arrays.toString(arr));
+        int[] treminste = Oblig1.tredjeMin(array);
+        System.out.print("Oppgave 9 :\nInput array: " + Arrays.toString(array) + "\nIndex av tre minste verdier: " + Arrays.toString(treminste) + "\nVerdi av tre minste verdier: " + array[treminste[0]] + ", " + array[treminste[1]] + ", " + array[treminste[2]] + "\n");
 
         String flett1 = "ABC";
         String flett2 = "DEFGH";
