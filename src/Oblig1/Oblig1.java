@@ -1,5 +1,6 @@
 package Oblig1;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
@@ -102,64 +103,64 @@ public class Oblig1 {
 
     ///// Oppgave 4 //////////////////////////////////////
     // 6, 10, 9, 4, 1, 3, 8, 5, 2, 7
-    public static void delsortering(int[] a) {
+    public static int[] delsortering(int[] a) {
+
+        if (a.length == 0) {
+            return a;
+        }
         int begin = 0;
         int end = a.length;
-
         int left = 0;
         int right = end-1;
         int partall = 0;
         int oddetall = 0;
-        System.out.println(Arrays.toString(a));
+        boolean harOddetall = false;
+        boolean harPartall = false;
+        // sjekker om array'et inneholder kun partall, kun oddetall, eller en blanding. Resultatet av dette bruks senere i beslutningen om hvordan listen skal sorteres
+        for (int i = begin; i < end; i++) {
+            if (a[i] % 2 == 0) {
+                harPartall = true;
+            } else if (a[i] % 2 == 1) {
+                harOddetall = true;
+            }
+        }
 
+        System.out.println(Arrays.toString(a));
         while(left < right) {
-            if(a[left] % 2 == 1) {
+
+            while (a[left] % 2 == 1 && left < right) {
+                System.out.println("Left : "+left);
                 left++;
-            } else {
-                partall = a[left];
+                if (a[left] < 0) {
+                    left++;
+                }
             }
-            if (a[right] % 2 == 0) {
+            while (a[right] % 2 == 0 && right > left) {
+                System.out.println("Right : "+right);
                 right--;
-
-            } else {
-                oddetall = a[right];
+                if (a[right] < 0) {
+                    right--;
+                }
             }
-            a[left] = oddetall;
-            a[right] = partall;
+            if (left >= right) break;
+            int temp = a[left];
+            a[left] = a[right];
+            a[right] = temp;
 
-            left++;
-            right--;
-            System.out.println(left+"..."+right);
             System.out.println(Arrays.toString(a));
-
+            //sortere oddetallene fra index 0 til left (4)
+        }
+        System.out.println(harPartall+"-------------"+harOddetall);
+        // dersom listen inneholder kun partall, eller kun oddetall sorteres hele listen en gang
+        if ((harPartall && !harOddetall) || (harOddetall && !harPartall)) {
+            helperClass.quicksort(a, 0, end-1);
+        } else { // dersom listen inneholder en blanding av partall og oddetall sorteres listen to ganger, først venstre halvdel(oddetall), deretter høyre halvdel(partall)
+            helperClass.quicksort(a, 0, right-1);
+            helperClass.quicksort(a, right, end-1);
         }
 
-
-        System.out.println(Arrays.toString(a));
-        // bruker insertion sort for å sortere hele listen
-        /*for (int i = begin; i < end; i++) {
-           int key = a[i];
-           int j = i-1;
-           while(j>=0 && a[j]>key) {
-               a[j+1] = a[j];
-               j = j-1;
-           }
-           a[j+1] = key;
-        }
-        int antallOddetall = 0;
-        System.out.println(Arrays.toString(a));
-        for (int i = 0; i < end; i++) {
-            if (a[i] % 2 != 0) {
-                int temp = a[i];
-                a[i] = a[end-1-i];
-                a[end-1-i] = temp;
-                antallOddetall++;
-            } else {
-
-            }
-        }*/
-        //System.out.println(antallOddetall);
-        //System.out.println(Arrays.toString(a));
+        return a;
+       // System.out.println("etter quicksort : "+Arrays.toString(a));
     }
 
     ///// Oppgave 5 //////////////////////////////////////
@@ -249,26 +250,42 @@ public class Oblig1 {
 
 class helperClass {
     public static void quicksort(int[] a, int begin, int end) {
-        if (begin + 1 == end) return;
-        int p = byttPivotBakerst(a, begin, end);
-        int q = partisjoner(a, p, begin, end);
-        byttPivotTilbake(a, end, q);
-        quicksort(a, begin, q);
-        quicksort(a, q+1, end);
+        if (begin < end) {
+            int p = partisjoner(a, begin, end);
+            quicksort(a, begin, p-1);
+            quicksort(a, p+1, end);
+        }
     }
 
     public static int byttPivotBakerst(int[] a, int begin, int end) {
         int p = a[end/2];
-        int temp = a[end-1];
-        a[end-1] = p;
-        return 0;
+        int temp = a[end];
+        a[end] = p;
+        a[end/2] = temp;
+        System.out.println(Arrays.toString(a));
+        return p;
     }
 
-    public static int partisjoner(int[] a, int pivot, int begin, int end) {
-        return 0;
+    public static int partisjoner(int[] a, int begin, int end) {
+        int pivot = a[end];
+        int j = begin-1;
+        for (int i = begin; i < end; i++) {
+            if (a[i] <= pivot) {
+                j++;
+                int temp = a[j];
+                a[j] = a[i];
+                a[i] = temp;
+            }
+        }
+        int temp = a[j+1];
+        a[j+1] = a[end];
+        a[end] = temp;
+        return j+1;
     }
 
-    public static int byttPivotTilbake(int[] a, int end, int q) {
-        return 0;
+    public static void byttPivotTilbake(int[] a, int end, int q) {
+        int temp = a[end];
+        a[end] = a[q];
+        a[q] = temp;
     }
 }
