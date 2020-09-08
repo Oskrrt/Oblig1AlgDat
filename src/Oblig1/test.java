@@ -737,9 +737,9 @@ public class test {
         boolean flere1 = true;
 
         while (flere1) {
-            int[] c = Oblig1.tredjeMin(tabell);
+            int[] Oc = Oblig1.tredjeMin(tabell);
 
-            if (tabell[c[0]] != 1 || tabell[c[1]] != 2 || tabell[c[2]] != 3) {
+            if (tabell[Oc[0]] != 1 || tabell[Oc[1]] != 2 || tabell[Oc[2]] != 3) {
                 System.out.println("Oppgave 9: c) Feil for " + Arrays.toString(tabell));
                 antallFeil++;
                 break;
@@ -782,7 +782,6 @@ public class test {
                 antallFeil++;
                 break;
             }
-
             flere2 = nestePermutasjon(a);
         }
 

@@ -3,6 +3,7 @@ package Oblig1;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
+import java.util.Random;
 
 public class Oblig1 {
     private Oblig1() {
@@ -31,6 +32,9 @@ public class Oblig1 {
     }
 
 
+    // Når blir det flest ombyttinger?
+    // Når blir det færrest?
+    // Hvor mange blir det i gjennomsnitt?
     public static int ombyttinger(int[] a) {
         int antall = 0;
         //12, 1, 2, 3, 11, 5, 6, 7, 8, 9
@@ -40,10 +44,31 @@ public class Oblig1 {
                 int temp = a[i];
                 a[i] = a[i - 1];
                 a[i - 1] = temp;
-                System.out.println(Arrays.toString(a));
+              //  System.out.println(Arrays.toString(a));
             }
         }
         return antall;
+    }
+
+    //----------------------------------------------------------------------------------------------------
+    public static void bytt(int[] a, int i, int j){
+
+        int temp = a[i]; a[i] = a[j]; a[j] = temp;
+    }
+    public static int[] randPerm(int n){  // en effektiv versjon
+
+        Random r = new Random();         // en randomgenerator
+        int[] a = new int[n];            // en tabell med plass til n tall
+
+        Arrays.setAll(a, i -> i + 1);    // legger inn tallene 1, 2, . , n
+
+        for (int k = n - 1; k > 0; k--)  // løkke som går n - 1 ganger
+        {
+            int i = r.nextInt(k+1);        // en tilfeldig tall fra 0 til k
+            bytt(a,k,i);                   // bytter om
+        }
+
+        return a;                        // permutasjonen returneres
     }
 
 
@@ -110,6 +135,7 @@ public class Oblig1 {
         }
         int begin = 0;
         int end = a.length;
+
         int left = 0;
         int right = end-1;
         int partall = 0;
@@ -165,13 +191,32 @@ public class Oblig1 {
 
     ///// Oppgave 5 //////////////////////////////////////
     public static void rotasjon(char[] a) {
-        throw new UnsupportedOperationException();
+        if (a.length >= 2) {
+            char c = a[a.length - 1];
+            for(int i = a.length - 1; i >= 1; --i) {
+                a[i] = a[i - 1];
+            }
+            a[0] = c;
+        }
     }
+
 
     ///// Oppgave 6 //////////////////////////////////////
     public static void rotasjon(char[] a, int k) {
-        throw new UnsupportedOperationException();
-    }
+            int n = a.length;
+            if (n < 2){
+                return;
+            }
+            if ((k %= n) < 0){
+                k += n;
+            }
+            char[] b = Arrays.copyOfRange(a, n - k, n);
+            for (int i = n - 1; i >= k; i--){
+                a[i] = a[i - k];
+            }
+            System.arraycopy(b, 0, a, 0, k);
+        }
+
 
     ///// Oppgave 7 //////////////////////////////////////
     /// 7a)
@@ -209,15 +254,36 @@ public class Oblig1 {
 
     /// 7b)
     public static String flett(String... s) {
+        //hvilken indeks vi er interesserte i (den første bokstaven i arrayet, den andre bokstaven osv)
+        int relevantCharPosition = 0;
 
-        throw new UnsupportedOperationException();
-    }
+        //antall arrays vi har hentet alle karakterene fra
+        int numberOfFinishedArrays = 0;
+        StringBuilder out = new StringBuilder();
+
+        //mens det fortsatt finnes minst ett array med bokstaver vi skal hente ut
+        while (numberOfFinishedArrays < s.length){
+            for (int i = 0; i < s.length; i++) {
+                char[] currentChars = s[i].toCharArray();
+                if (currentChars.length > relevantCharPosition) {
+                    numberOfFinishedArrays = 0;
+                    out.append(currentChars[relevantCharPosition]);
+                } else {
+                    numberOfFinishedArrays++;
+                }
+            }
+            relevantCharPosition++;
+        }
+        return out.toString();
+        }
+
+
 
     ///// Oppgave 8 //////////////////////////////////////
     // 6,10,16,11,7,12,3,9,8,5
     public static int[] indekssortering(int[] a) {
         int[] c = new int[a.length];
-        System.arraycopy(a, 0, c, 0, 10);
+        System.arraycopy(a, 0, c, 0, a.length);
         Arrays.sort(c);
         int[] b = new int[a.length];
         for (int i = 0; i < a.length; i++) {
@@ -232,7 +298,51 @@ public class Oblig1 {
 
     ///// Oppgave 9 //////////////////////////////////////
     public static int[] tredjeMin(int[] a) {
-        throw new UnsupportedOperationException();
+        int n = a.length;     // tabellens lengde
+        if (n < 3) {       // må ha minst tre verdier
+            throw new NoSuchElementException("Det er for få verdier i tabellen. Du må ha minst tre verdier");
+        }
+
+        int[] c = indekssortering(new int[] {a[0], a[1],a[2]});
+
+        int m = c[0];
+        int nm1 = c[1];
+        int nm2 = c[2];
+
+        int minsteVerdi = a[c[0]];
+        int nestMaksVerdi1 = a[c[1]];
+        int nestMaksVerdi2 = a[c[2]];
+
+        for(int i = 3; i< n; i++){
+            if(a[i] < nestMaksVerdi2) {
+                if (a[i] < nestMaksVerdi1) {
+                    //Ny minimum
+                    if (a[i] < minsteVerdi) {
+                        nm2 = nm1;
+                        nm1 = m;
+                        m = i;
+                        nestMaksVerdi2 = nestMaksVerdi1;
+                        nestMaksVerdi1 = minsteVerdi;
+                        minsteVerdi = a[m];
+                    } else {
+                        //Ny nest minimum
+                        nm2 = nm1;
+                        nm1 = i;
+                        nestMaksVerdi2 = nestMaksVerdi1;
+                        nestMaksVerdi1 = a[i];
+                    }
+                }
+                else{
+                    //Ny nest nest minimum
+                    nm2 = i;
+                    nestMaksVerdi2 = a[i];
+                }
+            }
+        }
+        c[0] = m;
+        c[1] = nm1;
+        c[2] = nm2;
+        return c;
     }
 
     ///// Oppgave 10 //////////////////////////////////////
@@ -241,12 +351,27 @@ public class Oblig1 {
     }
 
     public static boolean inneholdt(String a, String b) {
-        throw new UnsupportedOperationException();
+            char [] chars = a.toCharArray();
+            char [] chars1 = b.toCharArray();
+
+            if (a.length() > b.length()){
+                return false;
+            }
+
+            int[] Aarr = new int[256], Barr = new int[256];  // hjelpetabell med lenge 256, virker også hvis a og b inneholder andre tegn
+
+             for (char c : chars) Aarr[c]++;     // teller opp tegnene i a
+             for (char c : chars1) Barr[c]++;     // teller opp tegnene i b
+
+            for (int i = 0; i < 256; i++){
+                if (Aarr[i] > Barr[i]) return false;
+            }
+
+            return true;
+        }
     }
 
 
-
-}
 
 class helperClass {
     public static void quicksort(int[] a, int begin, int end) {
