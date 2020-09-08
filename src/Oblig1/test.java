@@ -742,7 +742,7 @@ public class test {
             if (tabell[Oc[0]] != 1 || tabell[Oc[1]] != 2 || tabell[Oc[2]] != 3) {
                 System.out.println("Oppgave 9: c) Feil for " + Arrays.toString(tabell));
                 antallFeil++;
-                //break;
+                break;
             }
             flere1 = nestePermutasjon(tabell);
         }
@@ -780,7 +780,7 @@ public class test {
             if (a[m] != 1 || a[nm] != 2 || a[tm] != 3) {
                 System.out.println("Oppgave 9: f) Feil for " + Arrays.toString(a));
                 antallFeil++;
-                //break;
+                break;
             }
             flere2 = nestePermutasjon(a);
         }

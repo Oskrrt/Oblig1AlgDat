@@ -36,8 +36,10 @@ public class Main {
 
 
         //Tester oppgave 9
-        int[] arr = {-12,12,6,-5,4,2};
-        System.out.print("Oppgave 9 "+Arrays.toString(Oblig1.tredjeMin(arr)));
+        int[] arr = {6,5,1,3,2,4};
+        int[] array = Oblig1.randPerm(20);
+        Oblig1.delsortering(arr);
+        System.out.print("Oppgave 9 "+Arrays.toString(arr));
 
         String flett1 = "ABC";
         String flett2 = "DEFGH";
@@ -55,6 +57,5 @@ public class Main {
 
 
         System.out.println(Oblig1.inneholdt("ABBA", "RABARBARA"));
-
     }
 }
