@@ -290,7 +290,6 @@ class Oblig1 {
                 }
             }
         }
-        System.out.println(Arrays.toString(b));
         return b;
     }
 
