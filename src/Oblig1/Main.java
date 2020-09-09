@@ -35,7 +35,7 @@ public class Main {
         Oblig1.rotasjon(k,3); System.out.println(Arrays.toString(k) + " En rotasjon på tre enheter mot hoyre");
         Oblig1.rotasjon(k,-2); System.out.println(Arrays.toString(k) + " En rotasjon på to enheter mot venstre");
 
-        System.out.println("Oppgave 8 : "+Arrays.toString(Oblig1.indekssortering(new int[] {6,10,3,16,11,7,12,3,9,8,5})));
+        System.out.println("Oppgave 8 : "+Arrays.toString(Oblig1.indekssortering(new int[] {6,3,10,16,11,7,12,3,9,8,5})));
 
 
 

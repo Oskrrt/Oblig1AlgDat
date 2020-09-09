@@ -1,9 +1,11 @@
-/*
-s333993 - Oskar Ruyter
-s344170 - Marius Sørum
-s331179 - Simen Nordgaard Renberg
-s344179 - Kunta Samuel Houen
+/**
+ * @authors
+ * s333993 - Oskar Ruyter
+ * s344170 - Marius Sørum
+ * s331179 - Simen Nordgaard Renberg
+ * s344179 - Kunta Samuel Houen
 */
+
 
 package Oblig1;
 
@@ -38,9 +40,15 @@ class Oblig1 {
     }
 
 
-    // Naar blir det flest ombyttinger?
-    // Naar blir det faerrest?
-    // Hvor mange blir det i gjennomsnitt?
+    /**
+      * Naar blir det flest ombyttinger?
+      *     Det blir flest ombyttinger naar det storste tallet ligger paa plass 0
+      * Naar blir det faerrest?
+      *     Det blir faerrest ombyttinger naar det storste tallet ligger paa plass a.length-1
+      * Hvor mange blir det i gjennomsnitt?
+      *     Vi lagde en metode i helperClass nederst i denne filen som finner gjennomsnittlige ombyttinger av random permutasjoner 10 ganger.
+      *     Ved hjelp av denne fant vi ut at formelen for gjennomsnittet er n-log2(n). Ved n = 10 blir gjennomsnitt 7. Ved 20 tall blir gjennomsnitt 16.
+      */
     static int ombyttinger(int[] a) {
         int antall = 0;
         //12, 1, 2, 3, 11, 5, 6, 7, 8, 9
@@ -273,7 +281,12 @@ class Oblig1 {
         for (int i = 0; i < a.length; i++) {
             for (int j = 0; j < c.length; j++) {
                 if (c[i] == a[j]) {
+                    if(c[i] < c.length-1 && c[i] == c[i+1]) {
+                        b[i] = j;
+                        break;
+                    }
                     b[i] = j;
+
                 }
             }
         }
